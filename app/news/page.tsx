@@ -1,4 +1,4 @@
-import React from "react";
+import Link from "next/link";
 
 function NewsPage() {
   return (
@@ -6,13 +6,13 @@ function NewsPage() {
       <h1>News Page</h1>
       <ul>
         <li>
-          <a href="news/1">News 1</a>
+          <Link href="news/1">News 1</Link>
         </li>
         <li>
-          <a href="news/2">News 2</a>
+          <Link href="news/2">News 2</Link>
         </li>
         <li>
-          <a href="news/3">News 3</a>
+          <Link href="news/3">News 3</Link>
         </li>
       </ul>
     </>
