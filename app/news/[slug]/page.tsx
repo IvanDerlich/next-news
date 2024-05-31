@@ -1,12 +1,13 @@
 import React from "react";
 import { DUMMY_NEWS } from "@/dummy-news";
 import DisplayImage from "@/src/components/DisplayImage";
+import { notFound } from "next/navigation";
 
 function NewsArticlePage({ params: { slug } }) {
   const newsItem = DUMMY_NEWS.find((newsItem) => newsItem.id === slug);
 
   if (!newsItem) {
-    return <h1>News item not found!</h1>;
+    notFound();
   }
 
   return (
