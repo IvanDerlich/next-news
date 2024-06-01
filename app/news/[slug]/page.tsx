@@ -1,6 +1,6 @@
 import React from "react";
 import { DUMMY_NEWS } from "@/dummy-news";
-import DisplayImage from "@/src/components/DisplayImage";
+import DisplayImage from "@/components/DisplayImage";
 import { notFound } from "next/navigation";
 
 function NewsArticlePage({ params: { slug } }) {
@@ -13,7 +13,7 @@ function NewsArticlePage({ params: { slug } }) {
   return (
     <article className="new-article">
       <header>
-        <DisplayImage image={newsItem.image} title={newsItem.title} />
+        <DisplayImage src={newsItem.image} alt={newsItem.title} />
         <h1>{newsItem.title}</h1>
         <time dateTime={newsItem.date}>{newsItem.date}</time>
       </header>

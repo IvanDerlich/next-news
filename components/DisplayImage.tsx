@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useScreenWidth } from "@/src/hooks/useScreenWidth";
+import { useScreenWidth } from "@/hooks/useScreenWidth";
 
-const DisplayImage = ({ image, title }) => {
+const DisplayImage = ({ src, alt }) => {
   const screenWidth = useScreenWidth();
 
   console.log("screenWidth: ", screenWidth);
@@ -12,8 +12,8 @@ const DisplayImage = ({ image, title }) => {
 
   return (
     <Image
-      src={`/images/news/${image}`}
-      alt={title}
+      src={src}
+      alt={alt}
       width={screenWidth * 0.5}
       height={screenWidth * 0.5}
       style={{ minWidth: squareSize, minHeight: squareSize }}
