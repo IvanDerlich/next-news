@@ -6,8 +6,6 @@ import { useScreenWidth } from "@/hooks/useScreenWidth";
 const DisplayImage = ({ src, alt }) => {
   const screenWidth = useScreenWidth();
 
-  console.log("screenWidth: ", screenWidth);
-
   const squareSize = 300;
 
   return (

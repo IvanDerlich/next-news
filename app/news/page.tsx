@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { DUMMY_NEWS } from "@/dummy-news";
 import NewsList from "@/components/NewsList";
-import DisplayImage from "@/components/DisplayImage";
 
 function NewsPage() {
   return (

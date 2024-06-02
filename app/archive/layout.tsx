@@ -1,4 +1,4 @@
-function ArchiveLayout({ archive, latest }) {
+function ArchiveLayout({ children, archive, latest }) {
   return (
     <div>
       <h1>News Archive</h1>

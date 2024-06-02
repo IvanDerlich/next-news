@@ -13,7 +13,10 @@ function NewsArticlePage({ params: { slug } }) {
   return (
     <article className="new-article">
       <header>
-        <DisplayImage src={newsItem.image} alt={newsItem.title} />
+        <DisplayImage
+          src={`/images/news/${newsItem.image}`}
+          alt={newsItem.title}
+        />
         <h1>{newsItem.title}</h1>
         <time dateTime={newsItem.date}>{newsItem.date}</time>
       </header>

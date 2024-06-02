@@ -1,8 +1,12 @@
+// import NewsList from "@/components/NewsList";
+// import { getNewsForYear } from "@/helper-methods/news";
 import { getAvailableNewsYears } from "@/helper-methods/news";
 import Link from "next/link";
 
-function ArchivePage() {
+function page({ params: { filter } }) {
+  // const news = getNewsForYear(filter);
   const links = getAvailableNewsYears();
+  console.log("filter: ", filter);
   return (
     <header id="archive-header">
       <nav>
@@ -18,4 +22,4 @@ function ArchivePage() {
   );
 }
 
-export default ArchivePage;
+export default page;
