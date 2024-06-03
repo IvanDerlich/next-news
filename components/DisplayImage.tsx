@@ -3,18 +3,17 @@
 import Image from "next/image";
 import { useScreenWidth } from "@/hooks/useScreenWidth";
 
-const DisplayImage = ({ src, alt }) => {
+const DisplayImage = ({ src, alt, ratio }) => {
   const screenWidth = useScreenWidth();
-
-  const squareSize = 300;
+  const minSize = 340;
 
   return (
     <Image
       src={src}
       alt={alt}
-      width={screenWidth * 0.5}
-      height={screenWidth * 0.5}
-      style={{ minWidth: squareSize, minHeight: squareSize }}
+      width={screenWidth * ratio}
+      height={screenWidth * ratio}
+      style={{ minWidth: minSize, minHeight: minSize }}
     />
   );
 };

@@ -7,7 +7,11 @@ function NewsList({ news }) {
       {news.map((item) => (
         <li key={item.id}>
           <Link href={`/news/${item.id}`}>
-            <DisplayImage src={`/images/news/${item.image}`} alt={item.title} />
+            <DisplayImage
+              src={`/images/news/${item.image}`}
+              alt={item.title}
+              ratio={0.3}
+            />
             <span>{item.title}</span>
           </Link>
         </li>

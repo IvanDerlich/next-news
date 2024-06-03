@@ -16,6 +16,7 @@ function NewsArticlePage({ params: { slug } }) {
         <DisplayImage
           src={`/images/news/${newsItem.image}`}
           alt={newsItem.title}
+          ratio={6 / 10}
         />
         <h1>{newsItem.title}</h1>
         <time dateTime={newsItem.date}>{newsItem.date}</time>
