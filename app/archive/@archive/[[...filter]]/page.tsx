@@ -25,12 +25,21 @@ const months = [
 function page({ params: { filter } }) {
   const selectedYear = filter?.[0];
   const selectedMonth = filter?.[1];
+  const availableNewsYear = getAvailableNewsYears();
+  const availableNewsMonth = getAvailableNewsMonths(selectedYear);
+
   let news = [];
-  let links = getAvailableNewsYears();
+  let links = availableNewsYear;
   let newsContent = <p>No news fond for the selected period</p>;
+  if (
+    (selectedYear && !availableNewsYear.includes(+selectedYear)) ||
+    (selectedMonth && !availableNewsMonth.includes(+selectedMonth))
+  ) {
+    throw new Error("Invalid filter");
+  }
   if (selectedYear && !selectedMonth) {
     news = getNewsForYear(selectedYear);
-    links = getAvailableNewsMonths(selectedYear);
+    links = availableNewsMonth;
   } else if (selectedYear && selectedMonth) {
     news = getNewsForYearAndMonth(selectedYear, selectedMonth);
     links = [];
