@@ -10,7 +10,7 @@ function NewsList({ news }) {
             <DisplayImage
               src={`/images/news/${item.image}`}
               alt={item.title}
-              ratio={0.3}
+              ratio={0.2}
             />
             <span>{item.title}</span>
           </Link>

@@ -19,6 +19,7 @@ function NewsArticlePage({ params: { slug } }) {
             src={`/images/news/${newsItem.image}`}
             alt={newsItem.title}
             ratio={6 / 10}
+            minWidth={340}
           />
         </Link>
         <h1>{newsItem.title}</h1>
