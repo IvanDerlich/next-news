@@ -30,31 +30,29 @@
 
 ## Preview
 
+### Animation Preview
+
 <img src="docs/1.gif" id="main-image-space-shooter-game" />
 
 ### Home
 
 ![Picture 1](docs/1.png) <br>
 
-### Meal List
+### News List
 
-![Picture 1](docs/2.png) <br>
+![Picture 2](docs/2.png) <br>
 
-### Food Recipe
+### News Archive
 
-![Picture 1](docs/3.png) <br>
+![Picture 3](docs/3.png) <br>
 
-### Consirations
+### News Article
 
-![Picture 1](docs/4.png) <br>
+![Picture 4](docs/4.png) <br>
 
-### Food Recipe Creation Form
+### Image Zoom Modal
 
-![Picture 1](docs/5.png) <br>
-
-### Page Description
-
-![Picture 1](docs/6.png) <br>
+![Picture 5](docs/5.png) <br>
 
 ## Author
 
@@ -65,4 +63,4 @@
 - [Maximilian Schwarzmüller](https://maximilian-schwarzmueller.com/): This project is was done while following [his udemy tutorial](https://www.udemy.com/course/nextjs-react-the-complete-guide)
 - The builders of the technologies we take for granted while programming applications like this one.
 
-## [Repository](https://github.com/IvanDerlich/foodies)
+## [Repository](https://github.com/IvanDerlich/next-news)
