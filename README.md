@@ -22,7 +22,7 @@
 
 ## Technologies used
 
-<ul id="tech-list-foodies">
+<ul id="tech-list-next-news">
   <li>Nextjs</li>
 </ul>
 
