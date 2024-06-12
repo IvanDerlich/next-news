@@ -2,7 +2,7 @@
 
 ## Description
 
-<p id="description-news-website"> 
+<p id="description-next-news"> 
     A news website app, allowing users to browse and read the latest articles on various topics.
 <p>
 
