@@ -49,7 +49,6 @@ function page({ params: { filter } }) {
     newsContent = <NewsList news={news} />;
   }
 
-  console.log("filter: ", filter);
   return (
     <>
       <header id="archive-header">
