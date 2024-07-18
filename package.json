@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run init && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "init": "tsc db/init/index.ts -outDir db/temp && node db/temp"
+    "init": "rm -rf db/temp db/data.db && tsc db/init/index.ts -outDir db/temp && node db/temp"
   },
   "dependencies": {
     "better-sqlite3": "^11.1.2",
