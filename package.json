@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "init": "rm -rf db/temp db/data.db && tsc db/init/index.ts -outDir db/temp && node db/temp"
+    "init": "npm run removeDb && npm run transpile && node db/temp && npm run remove",
+    "transpile": "tsc db/init/index.ts -outDir db/temp",
+    "removeDb": "npm run remove && rm db/data.db",
+    "remove": "rm -rf db/temp"
   },
   "dependencies": {
     "better-sqlite3": "^11.1.2",
