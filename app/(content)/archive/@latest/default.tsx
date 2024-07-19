@@ -1,5 +1,5 @@
 import NewsList from "@/components/NewsList";
-import { getLatestNews } from "@/helper-methods/news";
+import { getLatestNews } from "@/db/access";
 
 function LatestPage() {
   const latestNews = getLatestNews();

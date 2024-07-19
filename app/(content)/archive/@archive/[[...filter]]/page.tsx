@@ -4,7 +4,7 @@ import {
   getNewsForYear,
   getNewsForYearAndMonth,
   getAvailableNewsMonths,
-} from "@/helper-methods/news";
+} from "@/db/access";
 import Link from "next/link";
 
 const months = [
