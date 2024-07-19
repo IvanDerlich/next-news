@@ -3,24 +3,31 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run init && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "init": "npm run removeDb && npm run transpile && node db/temp && npm run remove",
-    "transpile": "tsc db/init/index.ts -outDir db/temp",
-    "removeDb": "npm run remove && rm db/data.db",
-    "remove": "rm -rf db/temp"
+    "remove": "rm -rf temp",
+    "db:reset": "prisma migrate reset",
+    "db:seed": "npm-run-all transpile seed remove",
+    "seed": "node temp/seed.js",
+    "transpile": "tsc prisma/seed.ts prisma/seedData.ts -outDir temp"
   },
   "dependencies": {
+    "@prisma/client": "^5.17.0",
     "better-sqlite3": "^11.1.2",
-    "next": "14.1.0",
+    "next": "^14.2.5",
+    "prisma": "^5.17.0",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "20.12.13",
     "@types/react": "18.3.3",
+    "npm-run-all": "^4.1.5",
     "typescript": "5.4.5"
+  },
+  "prisma": {
+    "seed": "npm run db:seed"
   }
 }

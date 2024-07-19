@@ -1,10 +1,10 @@
-import sqlite from "better-sqlite3";
+"use server";
 
-const db = sqlite("data.db");
+const { PrismaClient } = require("@prisma/client");
+const db = new PrismaClient();
 
-export function getAllNews() {
-  // return DUMMY_NEWS;
-  const news = db.prepare("SELECT * FROM news").all();
+export async function getAllNews() {
+  const news = await db.news.findMany();
   return news;
 }
 
