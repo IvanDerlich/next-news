@@ -1,10 +1,11 @@
 "use client";
 
 import { notFound, useRouter } from "next/navigation";
-import { DUMMY_NEWS } from "@/dummy-news";
-export default function InterceptedPage({ params: { slug } }) {
+import { getNewsItem } from "@/db/access";
+
+export default async function InterceptedPage({ params: { id } }) {
   const router = useRouter();
-  const newsItem = DUMMY_NEWS.find((newsItem) => newsItem.id === slug);
+  const newsItem = await getNewsItem(id);
 
   if (!newsItem) {
     notFound();

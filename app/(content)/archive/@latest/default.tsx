@@ -1,8 +1,8 @@
 import NewsList from "@/components/NewsList";
 import { getLatestNews } from "@/db/access";
 
-function LatestPage() {
-  const latestNews = getLatestNews();
+async function LatestPage() {
+  const latestNews = await getLatestNews();
   return (
     <>
       <h1>Latest News Page</h1>

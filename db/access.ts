@@ -1,18 +1,15 @@
+"use server";
+
+import type { NewsItem } from "@/types";
 const { PrismaClient } = require("@prisma/client");
 const db = new PrismaClient();
 
 export async function getAllNews() {
-  // SELECT * FROM news
   const news = await db.news.findMany();
   return news;
 }
 
-// export function getLatestNews() {
-//   return DUMMY_NEWS.slice(0, 3);
-// }
-
-export function getLatestNews() {
-  // SELECT * FROM news ORDER BY date DESC LIMIT 3
+export async function getLatestNews(): Promise<NewsItem[]> {
   return db.news.findMany({
     take: 3,
     orderBy: {
@@ -21,49 +18,27 @@ export function getLatestNews() {
   });
 }
 
-// export function getAvailableNewsYears() {
-//   return DUMMY_NEWS.reduce((years, news) => {
-//     const year = new Date(news.date).getFullYear();
-//     if (!years.includes(year)) {
-//       years.push(year);
-//     }
-//     return years;
-//   }, []).sort((a, b) => b - a);
-// }
-
-export function getAvailableNewsYears() {
-  // SELECT DISTINCT strftime('%Y', date) as year FROM news
-  const formattedResult = db.news.findMany({
+export async function getAvailableNewsYears(): Promise<number[]> {
+  const dates = await db.news.findMany({
     distinct: ["date"],
     select: {
       date: true,
     },
   });
-  // const data = db.$queryRaw`SELECT DISTINCT EXTRACT(YEAR FROM date) as year FROM news`;
-  // console.log("data", data);
-  // const formattedResult = data.map((row) => ({ date: row.year }));
-  // console.log("formattedResult", formattedResult);
-  return formattedResult;
+  let years = dates.map((date) => Number(date.date.slice(0, 4)));
+  years = [...Array.from(new Set(years))];
+  return years.sort((a, b) => a - b);
 }
 
-// export function getAvailableNewsMonths(year) {
-//   return DUMMY_NEWS.reduce((months, news) => {
-//     const newsYear = new Date(news.date).getFullYear();
-//     if (newsYear === +year) {
-//       const month = new Date(news.date).getMonth();
-//       if (!months.includes(month)) {
-//         months.push(month + 1);
-//       }
-//     }
-//     return months;
-//   }, []).sort((a, b) => b - a);
-// }
+export async function getAvailableNewsMonths(year: string): Promise<number[]> {
+  const startDate = new Date(`${year}-01-01`).toISOString();
+  const endDate = new Date(`${year}-12-31`).toISOString();
 
-export function getAvailableNewsMonths(year) {
-  return db.news.findMany({
+  const dates = await db.news.findMany({
     where: {
       date: {
-        contains: year,
+        gte: startDate,
+        lt: endDate,
       },
     },
     distinct: ["date"],
@@ -71,15 +46,12 @@ export function getAvailableNewsMonths(year) {
       date: true,
     },
   });
+  const months = dates.map((date) => new Date(date.date).getMonth() + 2);
+
+  return months;
 }
 
-// export function getNewsForYear(year) {
-//   return DUMMY_NEWS.filter(
-//     (news) => new Date(news.date).getFullYear() === +year
-//   );
-// }
-
-export function getNewsForYear(year) {
+export async function getNewsForYear(year): Promise<NewsItem[]> {
   return db.news.findMany({
     where: {
       date: {
@@ -89,38 +61,31 @@ export function getNewsForYear(year) {
   });
 }
 
-// export function getNewsForYearAndMonth(year, month) {
-//   return DUMMY_NEWS.filter((news) => {
-//     const newsYear = new Date(news.date).getFullYear();
-//     const newsMonth = new Date(news.date).getMonth() + 1;
-//     return newsYear === +year && newsMonth === +month;
-//   });
-// }
-
-export function getNewsForYearAndMonth(year, month) {
-  return db.news.findMany({
+export async function getNewsForYearAndMonth(
+  year: number,
+  month: number
+): Promise<NewsItem[]> {
+  const startDate = `${year}-${String(month).padStart(2, "0")}-01`;
+  const endDate = new Date(year, month, 0).toISOString().split("T")[0];
+  const news = await db.news.findMany({
     where: {
       date: {
-        contains: `${year}-${month}`,
+        gte: startDate,
+        lte: endDate,
       },
     },
+    orderBy: {
+      date: "desc",
+    },
   });
+  return news;
 }
 
-// export async function getNewsItem(slug) {
-//   const newsItem = db.prepare('SELECT * FROM news WHERE slug = ?').get(slug);
-
-//   await new Promise((resolve) => setTimeout(resolve, 2000));
-
-//   return newsItem;
-// }
-
-export async function getNewsItem(slug) {
+export async function getNewsItem(id: string): Promise<NewsItem> {
   const newsItem = await db.news.findUnique({
     where: {
-      slug,
+      id,
     },
   });
-
   return newsItem;
 }

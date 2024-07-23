@@ -6,47 +6,39 @@ import {
   getAvailableNewsMonths,
 } from "@/db/access";
 import Link from "next/link";
+import { months } from "@/enums";
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-function page({ params: { filter } }) {
-  const selectedYear = filter?.[0];
-  const selectedMonth = filter?.[1];
-  const availableNewsYear = getAvailableNewsYears();
-  const availableNewsMonth = getAvailableNewsMonths(selectedYear);
+async function page({ params: { filter } }) {
+  const selectedYear: string | undefined = filter?.[0];
+  const selectedMonth: string | undefined = filter?.[1];
+  const availableNewsYear = await getAvailableNewsYears();
+  const availableNewsMonth = await getAvailableNewsMonths(selectedYear);
 
   let news = [];
   let links = availableNewsYear;
-  let newsContent = <p>No news fond for the selected period</p>;
+  let newsContent;
+
   if (
     (selectedYear && !availableNewsYear.includes(+selectedYear)) ||
     (selectedMonth && !availableNewsMonth.includes(+selectedMonth))
   ) {
     throw new Error("Invalid filter");
   }
+
   if (selectedYear && !selectedMonth) {
-    news = getNewsForYear(selectedYear);
+    news = await getNewsForYear(selectedYear);
     links = availableNewsMonth;
   } else if (selectedYear && selectedMonth) {
-    news = getNewsForYearAndMonth(selectedYear, selectedMonth);
+    news = await getNewsForYearAndMonth(+selectedYear, +selectedMonth);
     links = [];
   }
 
   if (news && news.length > 0) {
     newsContent = <NewsList news={news} />;
+  } else if (!selectedYear && !selectedMonth) {
+    newsContent = <></>;
+  } else {
+    newsContent = <p>No news found for the selected period</p>;
   }
 
   return (
@@ -59,7 +51,7 @@ function page({ params: { filter } }) {
               return (
                 <li key={link}>
                   <Link href={`/archive/${href_ext}`}>
-                    {selectedYear ? months[link] : link}
+                    {selectedYear ? months[link - 1] : link}
                   </Link>
                 </li>
               );

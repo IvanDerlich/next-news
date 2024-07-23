@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import { DUMMY_NEWS } from "@/dummy-news";
-export default function page({ params: { slug } }) {
-  console.log("slug: ", slug);
-  const newsItem = DUMMY_NEWS.find((newsItem) => newsItem.id === slug);
+import { getNewsItem } from "@/db/access";
+
+export default async function page({ params: { id } }) {
+  const newsItem = await getNewsItem(id);
 
   if (!newsItem) {
     notFound();
