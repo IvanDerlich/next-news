@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getNewsItem } from "@/db/access";
+import { getNewsItem } from "@/prisma/access";
 
 export default async function page({ params: { id } }) {
   const newsItem = await getNewsItem(id);

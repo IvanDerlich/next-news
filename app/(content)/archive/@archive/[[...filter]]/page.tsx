@@ -4,7 +4,7 @@ import {
   getNewsForYear,
   getNewsForYearAndMonth,
   getAvailableNewsMonths,
-} from "@/db/access";
+} from "@/prisma/access";
 import Link from "next/link";
 import { months } from "@/enums";
 

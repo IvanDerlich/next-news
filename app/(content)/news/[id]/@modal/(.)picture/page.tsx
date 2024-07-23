@@ -1,7 +1,7 @@
 "use client";
 
 import { notFound, useRouter } from "next/navigation";
-import { getNewsItem } from "@/db/access";
+import { getNewsItem } from "@/prisma/access";
 
 export default async function InterceptedPage({ params: { id } }) {
   const router = useRouter();

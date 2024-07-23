@@ -1,5 +1,5 @@
 import NewsList from "@/components/NewsList";
-import { getLatestNews } from "@/db/access";
+import { getLatestNews } from "@/prisma/access";
 
 async function LatestPage() {
   const latestNews = await getLatestNews();
