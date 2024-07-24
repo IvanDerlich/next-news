@@ -1,22 +1,17 @@
-"use client";
-
-import { notFound, useRouter } from "next/navigation";
+import { notFound } from "next/navigation";
 import { getNewsItem } from "@/prisma/access";
+import ModalBackDrop from "@/components/ModalBackDrop";
 
 export default async function InterceptedPage({ params: { id } }) {
-  const router = useRouter();
   const newsItem = await getNewsItem(id);
 
   if (!newsItem) {
     notFound();
   }
 
-  const closeModal = () => {
-    router.back();
-  };
   return (
     <>
-      <div className="modal-backdrop" onClick={closeModal} />
+      <ModalBackDrop />
       <dialog className="modal" open>
         <div className="fullscreen-image">
           <img
