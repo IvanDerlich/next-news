@@ -46,7 +46,8 @@ export async function getAvailableNewsMonths(year: string): Promise<number[]> {
       date: true,
     },
   });
-  const months = dates.map((date) => new Date(date.date).getMonth() + 2);
+
+  const months = dates.map((date) => Number(date.date.slice(5, 7)));
 
   return months;
 }
