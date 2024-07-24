@@ -15,4 +15,5 @@
 # custom
 .vscode
 .eslintcache
+db/temp
 

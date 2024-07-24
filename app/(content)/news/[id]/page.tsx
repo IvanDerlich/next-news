@@ -1,10 +1,9 @@
-import React from "react";
-import { DUMMY_NEWS } from "@/dummy-news";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { getNewsItem } from "@/prisma/access";
 
-function NewsArticlePage({ params: { slug } }) {
-  const newsItem = DUMMY_NEWS.find((newsItem) => newsItem.id === slug);
+async function NewsArticlePage({ params: { id } }) {
+  const newsItem = await getNewsItem(id);
 
   if (!newsItem) {
     notFound();
@@ -13,7 +12,7 @@ function NewsArticlePage({ params: { slug } }) {
   return (
     <article className="news-article">
       <header>
-        <Link href={`/news/${slug}/picture`}>
+        <Link href={`/news/${id}/picture`}>
           <img src={`/images/news/${newsItem.image}`} alt={newsItem.title} />
         </Link>
         <h1>{newsItem.title}</h1>
