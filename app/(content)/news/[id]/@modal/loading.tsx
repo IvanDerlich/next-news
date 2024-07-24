@@ -1,7 +1,5 @@
-import React from "react";
-
-function loading() {
+function Loading() {
   return <div>Loading Image...</div>;
 }
 
-export default loading;
+export default Loading;
